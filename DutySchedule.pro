@@ -26,10 +26,14 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    LoggingCategories/loggingcategories.cpp \
+    DataBase/database.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    LoggingCategories/loggingcategories.h \
+    DataBase/database.h
 
 FORMS += \
         mainwindow.ui
