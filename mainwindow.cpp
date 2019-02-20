@@ -7,8 +7,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    db = new DataBase();
-
 
 }
 
@@ -20,8 +18,5 @@ MainWindow::~MainWindow()
 void MainWindow::show()
 {
     QMainWindow::show();
-    if(!db->openDataBase()){
-        this->close();
-        this->deleteLater();
-    }
+
 }

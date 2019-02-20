@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "LoggingCategories/loggingcategories.h"
+#include "DataBase/database.h"
 #include <QApplication>
 #include <QTranslator>
 #include <QLibraryInfo>
@@ -37,6 +38,10 @@ int main(int argc, char *argv[])
 #endif
 
     qInfo(logInfo()) << QObject::tr("Запуск программы.");
+
+    DataBase db;
+    if(!db.openDataBase())
+        return 1;
 
     MainWindow w;
     w.show();

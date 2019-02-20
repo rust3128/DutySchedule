@@ -1,14 +1,12 @@
 #include "database.h"
 #include "LoggingCategories/loggingcategories.h"
+
 #include <QFile>
 #include <QMessageBox>
 #include <QSettings>
 #include <QSqlQuery>
 
 #define SETTINGS_FILE_NAME  "DutySchedule.ini"
-
-
-
 
 
 DataBase::DataBase(QObject *parent) : QObject(parent)
@@ -22,13 +20,15 @@ bool DataBase::openDataBase()
     if(!iniFile.exists()){
         qCritical(logCritical()) << this->tr("Отсутсвует файл настроек приложения");
         QMessageBox::critical(nullptr,this->tr("Ошибка"),this->tr("Отсутсвует файл настроки приложения.\nСоединение с базой данных не установлено."));
-        return false;
+        connectDlg = new ConnectionDialog();
+        connectDlg->exec();
+        connectDlg->deleteLater();
+//        return false;
     }
     QSettings settings(SETTINGS_FILE_NAME, QSettings::IniFormat);
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
 
     settings.beginGroup("DATABASE");
-    qInfo(logInfo()) << settings.value("HostName").toString();
     db.setHostName(settings.value("HostName").toString());
     db.setDatabaseName(settings.value("DataBase").toString());
     db.setUserName(settings.value("User").toString());
@@ -40,6 +40,9 @@ bool DataBase::openDataBase()
         QMessageBox::critical(nullptr, QObject::tr("Не могу открыть базу данных"),
                               QString("Не могу установить соединение с базой данных\nПричина: %1\n Проверьте настройки подключения.").arg(db.lastError().text()),
                               QMessageBox::Cancel);
+        connectDlg = new ConnectionDialog();
+        connectDlg->exec();
+        connectDlg->deleteLater();
         return false;
     }
     QSqlQuery q;
