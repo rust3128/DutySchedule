@@ -29,17 +29,20 @@ SOURCES += \
         mainwindow.cpp \
     LoggingCategories/loggingcategories.cpp \
     DataBase/database.cpp \
-    ConnectionDialog/connectiondialog.cpp
+    ConnectionDialog/connectiondialog.cpp \
+    WorkTypeDialog/worktypedialog.cpp
 
 HEADERS += \
         mainwindow.h \
     LoggingCategories/loggingcategories.h \
     DataBase/database.h \
-    ConnectionDialog/connectiondialog.h
+    ConnectionDialog/connectiondialog.h \
+    WorkTypeDialog/worktypedialog.h
 
 FORMS += \
         mainwindow.ui \
-    ConnectionDialog/connectiondialog.ui
+    ConnectionDialog/connectiondialog.ui \
+    WorkTypeDialog/worktypedialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

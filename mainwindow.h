@@ -17,6 +17,9 @@ public:
     ~MainWindow();
     void show();
 
+private slots:
+    void on_actionWorkType_triggered();
+
 private:
     Ui::MainWindow *ui;
 
